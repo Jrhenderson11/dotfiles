@@ -1,0 +1,5 @@
+# UFW setup stuffs
+
+sudo ufw default deny incoming
+
+sudo ufw allow in on tun0 to any port 1024:65535 proto tcp
