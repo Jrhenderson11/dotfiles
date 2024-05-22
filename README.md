@@ -6,6 +6,12 @@
 gcl dotfiles
 cd dotfiles
 ln $PWD/.aliases ~/.aliases
+
+ln $PWD/.inputrc ~/.inputrc
+
+cp ~/.config/i3/config ~/.config/i3/config.bak
+ln $PWD/.i3/config ~/.config/i3/config
+
 ```
 
 for DOTFILE in `find ~/dotfiles`

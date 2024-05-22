@@ -1,0 +1,367 @@
+
+
+#      _   _                _                   _ _                     
+#     | | | |              | |                 | (_)                    
+#     | |_| | ___ _ __   __| | ___  ___    __ _| |_  __ _ ___  ___  ___ 
+#     |  _  |/ _ \ '_ \ / _` |/ _ \/ __|  / _` | | |/ _` / __|/ _ \/ __|
+#     | | | |  __/ | | | (_| | (_) \__ \ | (_| | | | (_| \__ \  __/\__ \
+#     \_| |_/\___|_| |_|\__,_|\___/|___/  \__,_|_|_|\__,_|___/\___||___/
+#                                                                       
+                                                                  
+
+export MSFLOGO="/home/james/.msf4/logos/custom_ascii.txt"
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias hosts='bat /etc/hosts -p'
+alias mkdir="mkdir -pv"
+
+alias ffg="find | grep -i "
+
+function search() {
+   grep $1 ./ -iR
+}
+
+function hex2dec() {
+  echo "ibase=16; $(echo $1 | tr a-z A-Z)" | bc
+}
+
+alias sa='source ~/.aliases'
+
+#alias ssh-keygen="python3 /tools/misc/ssh-keygen"
+
+# Flimmer
+alias flimmer='python3 /home/james/Documents/git/flims/flimmer.py'
+
+# Pip
+alias pip_upgrade_all3='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 pip3 install -U'
+alias 'pydoc '='python3 -m pydoc '
+
+# Editors
+alias sublime='/usr/bin/subl'
+alias s='/usr/bin/subl'
+alias pycharm='/home/james/Documents/jetbrains/pycharm-community-2018.3.3/bin/pycharm.sh'
+alias clion='/home/james/Documents/jetbrains/bin/clion.sh'
+alias android_studio="/home/james/android-studio/bin/studio.sh &"
+alias jeclipse='/home/james/eclipse/java-oxygen/eclipse/eclipse'
+
+
+# Peripherals
+# use xrandr to find connected screens
+alias dual_screens='arandr'
+alias reset_screens='xrandr --output eDP-1 --same-as HDMI-2'
+alias change_screens='/opt/change_screens.sh'
+alias qwick_screens='change_screens'
+alias razer='openrazer-daemon &> /dev/null; polychromatic-controller &> /dev/null &'
+
+# Typos + util
+alias whcih='which'
+alias clea='clear'
+alias suod='sudo '
+
+alias sudo='sudo '
+
+
+function highlight () {
+    while read line; do
+        GREP_COLORS='mt=1;32' grep -E --color "$1|$"
+    done
+}
+
+function highlight_red () {
+    while read line; do
+        GREP_COLORS='mt=1;31' grep -E --color "$1|$"
+    done
+}
+
+# Git
+alias git='git '
+alias sta='status'
+alias gdiff='git diff'
+
+
+alias gc='git clone `xclip -selection c -o`'
+
+# Backup
+backup='sudo /opt/backup.sh'
+
+
+# pwnie island
+alias pwnie_island="/home/james/Documents/CTF/afnom/pwnie_island/PwnAdventure3/PwnAdventure3/Binaries/Linux/PwnAdventure3-Linux-Shipping"
+alias uni_vpn="sudo ip route add 147.188.127.11 dev tun0"
+
+
+# docker address
+alias docker='docker '
+alias address="container inspect practical_bhabha | grep \"IPAddress | head -n 1 | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
+
+# OS module
+alias ssh-osvm='ssh bham@osvm'
+
+# Netsec module
+alias netsec_client='ssh user@netsec_client'
+alias netsec_server='ssh user@netsec_server'
+alias netsec_router='ssh user@netsec_router'
+
+# Project
+alias zotero='nohup /opt/Zotero_linux-x86_64/zotero &'
+
+# Home network
+alias lamassu='ssh pi@lamassu'
+
+alias pyv="python3 -m venv .venv; . .venv/bin/activate"
+
+alias nautilus="nautilus --no-desktop &> /dev/null &"
+
+alias dashboard="~/Documents/git/dashboard/dashboard.sh"
+
+################ Usefulness ################
+
+function f() {
+    command nautilus "$@" &> /dev/null &
+}
+
+
+alias back="cd -"
+
+alias less="less -R"
+alias tree="tree -C -I .venv"
+
+alias proj='cd ~/Documents/CTF/project/'
+alias doc='cd ~/Documents/'
+alias down='cd ~/Downloads/'
+alias desk='cd ~/Desktop/'
+alias ctf='cd ~/Documents/CTF/'
+
+alias copy="xclip -selection c"
+alias paste="xclip -selection c -o"
+
+alias nmgui="nmtui"
+
+function cd() {
+
+    if [ -n "$1" ]; then
+        cdpath="$1"
+        cdpath=$(sed -r "s#\.{5}/#../../../../#g" <<< "$cdpath")
+        cdpath=$(sed -r "s#\.{5}#../../../../../#g" <<< "$cdpath")
+        cdpath=$(sed -r "s#\.{4}/#../../../../#g" <<< "$cdpath")
+        cdpath=$(sed -r "s#\.{4}#../../../../#g" <<< "$cdpath")
+        cdpath=$(sed -r "s#\.{3}/#../../../#g" <<< "$cdpath")
+        cdpath=$(sed -r "s#\.{3}#../../../#g" <<< "$cdpath")
+        builtin cd "$cdpath"
+
+        OLD_TARGET=$t
+
+        if [[ $PWD == *"CTF/hackthebox/"* ]] && [[ -f "target.sh" ]]; then
+            
+            source target.sh
+            if [[ $OLD_TARGET != $t ]]; then
+                echo -e "[+] Acquired target details: $BGREEN$t$CLEAR"
+            fi
+        fi
+
+    else
+        builtin cd $*
+    fi
+} # cd
+
+
+function mcd() {
+    if [ -n "$1" ]; then
+        if [ -d "$1" ]; then
+            echo "$1 already exists"
+            return 0
+        fi
+        mkdir "$1" && cd "$1"
+
+        if [[ $PWD == *"CTF/hackthebox/${1}" ]]; then
+            python3 /home/james/Documents/CTF/hackthebox/setup_htb.py
+        fi
+
+    fi
+}
+
+alias ip="ip -c"
+
+################ HTB ################
+# NEW:
+alias htb_vpn='nmcli connection up hendo'
+# nm-applet -> edit -> hendo -> ipv4/6 -> routes -> only on network???
+# OLD:
+#alias htb_vpn='sudo openvpn /home/james/Documents/CTF/hackthebox/hendo.ovpn | /usr/bin/pretty_vpn.py'
+
+################ HACKING ################
+
+# Tool dir aliases
+CTF='/home/james/Documents/CTF/'
+TOOLS='/home/james/Documents/CTF/tools/'
+tools=$TOOLS
+wordlists='/home/james/Documents/CTF/tools/wordlists/'
+seclists='/home/james/Documents/CTF/tools/wordlists/seclists/'
+exploitdb='/home/james/Documents/CTF/tools/exploit-database'
+
+alias msfvenom='/opt/metasploit-framework/bin/msfvenom'
+alias msfconsole='/opt/metasploit-framework/bin/msfconsole'
+
+# Tool aliases
+alias ida='/tools/reversing/ida/ida64'
+alias ghidra='/home/james/Documents/ghidra_10.0-BETA_PUBLIC/ghidraRun'
+
+alias c2='python3 /tools/misc/c2.py'
+
+function zap {
+    nohup /home/james/Documents/CTF/tools/web/zaproxy/ZAP_2.10.0/zap.sh $* &> /dev/null &
+}
+
+alias gobuster='/tools/web/gobuster/gobuster'
+
+alias f2bscan='/home/james/Documents/CTF/tools/scanners/f2bscan.sh'
+
+alias johnj='/home/james/Documents/CTF/tools/passwords/JohnTheRipper/run/john'
+
+alias searchsploit='/home/james/Documents/CTF/tools/exploit-database/searchsploit'
+alias unicorn="/home/james/Documents/CTF/training/lab/windows/unicorn/unicorn.py"
+alias dnsrecon="python3 /home/james/Documents/CTF/tools/scanners/dnsrecon/dnsrecon.py"
+alias routersploit="python3 /home/james/Documents/CTF/tools/scanners/routersploit/rsf.py"
+alias stegger="python3 ~/Documents/git/ctftools/steg/stegger.py"
+alias enum4linux="/home/james/Documents/CTF/tools/scanners/enum4linux/enum4linux.pl"
+alias smbmap="/tools/scanners/smbmap/smbmap.py"
+alias bettercap_http="sudo bettercap -caplet https-ui &"
+alias jackit="python2.7 /home/james/.local/bin/jackit"
+
+#alias chisel='docker run --rm -it jpillora/chisel'
+
+alias ffuf="/home/james/Documents/CTF/tools/web/ffuf/ffuf"
+
+alias cewl="ruby /tools/web/CeWL/cewl.rb"
+
+#alias smtp-user-enum='perl /tools/scanners/smtp-user-enum-1.2/smtp-user-enum.pl'
+
+# /usr/local/share/bettercap/caplets/https-ui.cap
+
+
+# sudo nmcli radio wifi off
+# sudo rfkill unblock wlan
+
+# sudo service isc-dhcp-server restart
+# sudo service hostapd restart
+
+# https://pentest.blog/attacking-wpa-enterprise-wireless-network/
+# https://nims11.wordpress.com/2012/04/27/hostapd-the-linux-way-to-create-virtual-wifi-access-point/
+alias hostapd-wpe="hostapd-wpe /home/james/Documents/CTF/tools/networks/hostapd-wpe/hostapd-2.9/hostapd
+/hostapd-wpe.conf"
+# look in hostapd-wpe.log
+#/home/james/Documents/CTF/hostapd-wpe/asleap/asleap -C 83:f4:aa:9e:7d:87:dc:ef -R d6:3f:b0:9a:b3:d8:51:c4:e3:fb:ea:d6:8a:71:96:61:df:2f:26:f1:b0:ab:c9:92 -W /home/james/Documents/CTF/hostapd-wpe/hostapd-2.9/hostapd/testwordlist
+
+alias rustscan='docker run -it --rm --name rustscan rustscan/rustscan:latest'
+alias rustscan_recon_results='docker run -it -v `pwd`:/home/rustscan/scan/:rw --rm --name rustscan rustscan/rustscan:latest'
+
+
+alias real_nmap="/usr/local/bin/nmap"
+
+# function nmap {
+#     #if no timing in nmap default to -T5
+#     if ! [[ $* =~ -T[0-9] ]]; then
+#         real_nmap -T5 $* --stats-every 1s | pretty_nmap
+#     else
+#         real_nmap $* --stats-every 1s | pretty_nmap
+#     fi
+# }
+
+function enumer () {
+    cp /home/james/Documents/CTF/tools/privesc/linux/LinEnum3/LinEnum.sh ./linenum.sh && echo "[+] ./linenum.sh"
+}
+
+function enumer64 () {
+    cat /home/james/Documents/CTF/tools/privesc/linux/LinEnum3/LinEnum.sh | base64 -w0
+}
+
+function dirb () {
+    pushd ~/Documents/CTF/ctfs/tuctf/DirBuster-0.12/
+    java -jar DirBuster-0.12.jar
+    popd
+}
+
+
+alias sliver=/tools/implants/sliver/sliver-server
+#alias sliver='docker rm sliver_serv 2>/dev/null; docker run -d --name="sliver_serv" -p 127.0.0.1:31337:31337 -p 0.0.0.0:8888:8888 -p 0.0.0.0:808 -p 0.0.0.0:8080:8080 sliver_custom; echo "Sliver server started"'
+alias sliver-client='/tools/implants/sliver/sliver-client'
+
+# function ssh () {
+#     # Add backup checks???
+#     if [[ -f "notes.md" ]]; then
+
+#             # Try with key first
+
+#             possible_pass=`python3 /home/james/Documents/CTF/hackthebox/ssh_pass.py $1`
+
+#             if [ $possible_pass != "no_password_found" ]; then
+#                 echo -e "$BGREEN[+] found password in notes file: $CLEAR $possible_pass"
+#                 #sshpass -p $possible_pass ssh $1
+                
+#                 # ssh-copy-id -i KEYFILE $1
+#                 # ssh $1
+#                 return
+#             fi
+
+#     fi
+
+#     /usr/bin/ssh $@
+# }
+
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+alias "gandi.py"=/tools/gandi.py/gandi.py
+
+alias rrr='rr replay'
+
+alias calc='python3'
+
+alias duf='duf -hide fuse,special,loops'
+
+function diff() {
+    git diff --no-index --color-words "$@";
+}
+
+# Run `dig` and display the most useful info
+function digga() {
+    dig +nocmd "$1" any +multiline +noall +answer;
+}
+
+function getcertnames() {
+    if [ -z "${1}" ]; then
+        echo "ERROR: No domain specified.";
+        return 1;
+    fi;
+
+    local domain="${1}";
+    echo "Testing ${domain}…";
+    echo ""; # newline
+
+    local tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
+        | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
+
+    if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+        local certText=$(echo "${tmp}" \
+            | openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
+            no_serial, no_sigdump, no_signame, no_validity, no_version");
+        echo "Common Name:";
+        echo ""; # newline
+        echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//";
+        echo ""; # newline
+        echo "Subject Alternative Name(s):";
+        echo ""; # newline
+        echo "${certText}" | grep -A 1 "Subject Alternative Name:" \
+            | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
+        return 0;
+    else
+        echo "ERROR: Certificate not found.";
+        return 1;
+    fi;
+}
