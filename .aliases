@@ -78,7 +78,7 @@ function highlight_red () {
 
 # Git
 alias git='git '
-alias sta='status'
+alias sta='status -uall'
 alias gdiff='git diff'
 
 
@@ -127,7 +127,7 @@ function f() {
 alias back="cd -"
 
 alias less="less -R"
-alias tree="tree -C -I .venv"
+alias tree="tree -C -I '.venv|.git'"
 
 alias proj='cd ~/Documents/CTF/project/'
 alias doc='cd ~/Documents/'
@@ -365,3 +365,46 @@ function getcertnames() {
         return 1;
     fi;
 }
+
+alias jdecompile='procyon '
+alias 'pydoc '='python -m pydoc os.system'
+function ocr() {
+    sudo docker run -v $1:/tmp/img.png --network none jitesoft/tesseract-ocr /tmp/img.png stdout
+}
+
+rustscan='docker run -it --rm --name rustscan rustscan/rustscan:latest'
+alias rustscan_recon_results='docker run -it -v `pwd`:/home/rustscan/scan/:rw --rm --name rustscan rustscan/rustscan:latest'
+
+alias signjwt='/tools/web/signjwt.py'
+alias sql2john='/tools/web/sql2john.py'
+alias urlencode='/tools/web/urlencode.py'
+alias urldecode='/tools/web/urlencode.py -d'
+alias chimera='/tools/windows/Chimera/chimera.sh'
+alias monnet='sudo python3 /tools/misc/monnet/monnet.py'
+
+function md5sum() {
+    if [ -n "$1" ]; then
+        /usr/bin/md5sum $1
+    else
+        /usr/bin/md5sum | rev | cut -c3- | rev
+    fi
+}
+
+alias whatsmyip="dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'\"' '{ print $2}' | sed 's/\"//g' "
+
+alias bat='batcat -p '
+
+alias curl='curlie '
+
+alias df='duf -hide loops,special'
+alias duf='duf -hide loops,special'
+alias dashboard="/opt/dashboard.sh"
+alias harness="~/harness.sh"
+
+alias u='sudo ufw status verbose'
+function allow() {
+    sudo ufw allow in on $2 to any port $1 proto tcp
+}
+
+
+alias ffg='find ./ | grep -i'
