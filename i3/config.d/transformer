@@ -1,0 +1,1 @@
+bindsym $mod+x exec python3.10 /home/james/tools/transformer/transformer.py > /tmp/rofi.log 2>&1 

@@ -7,7 +7,8 @@
 #     | | | |  __/ | | | (_| | (_) \__ \ | (_| | | | (_| \__ \  __/\__ \
 #     \_| |_/\___|_| |_|\__,_|\___/|___/  \__,_|_|_|\__,_|___/\___||___/
 #                                                                       
-                                                                  
+
+source ~/.work_aliases
 
 export MSFLOGO="/home/james/.msf4/logos/custom_ascii.txt"
 
@@ -41,7 +42,7 @@ alias 'pydoc '='python3 -m pydoc '
 
 # Editors
 alias sublime='/usr/bin/subl'
-alias s='/usr/bin/subl'
+alias s='/snap/bin/subl'
 alias pycharm='/home/james/Documents/jetbrains/pycharm-community-2018.3.3/bin/pycharm.sh'
 alias clion='/home/james/Documents/jetbrains/bin/clion.sh'
 alias android_studio="/home/james/android-studio/bin/studio.sh &"
@@ -408,3 +409,35 @@ function allow() {
 
 
 alias ffg='find ./ | grep -i'
+
+
+rsed () {
+    local case_flag="" 
+    local OPTIND=1 
+    while getopts "i" opt
+    do
+        case $opt in
+            (i) case_flag="I"  ;;
+            (*) echo "Usage: rsed [-i] <sed_expression> <file_pattern>"
+                return 1 ;;
+        esac
+    done
+    shift $((OPTIND-1))
+    if [[ $# -lt 2 ]]
+    then
+        echo "Usage: rsed [-i] <sed_expression> <file_pattern>"
+        echo "  -i: case-insensitive matching (GNU sed only)"
+        return 1
+    fi
+    local sed_expr="$1" 
+    local pattern="$2" 
+    if [[ -n "$case_flag" ]]
+    then
+        find . -name "$pattern" -type f -exec sed -i "s/${sed_expr}/${case_flag}" {} \;
+    else
+        find . -name "$pattern" -type f -exec sed -i "$sed_expr" {} \;
+    fi
+}
+
+
+function mkrole() {mkdir -p roles/$1/tasks;s roles/$1/tasks/main.yml;}

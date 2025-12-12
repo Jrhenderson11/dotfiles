@@ -1,0 +1,11 @@
+[includeIf "hasconfig:remote.*.url:git@git.reversec.com/**"]
+  path = .gitconfig-work
+[includeIf "hasconfig:remote.*.url:git@github.com/**"]
+  path = .gitconfig-priv
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+  path = .gitconfig-priv
+[user]
+	name = James.Henderson
+	email = james.henderson@withsecure.com
+[init]
+	defaultBranch = main
