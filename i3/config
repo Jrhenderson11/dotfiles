@@ -25,7 +25,7 @@ focus_follows_mouse yes
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec /home/james/.config/i3/custom_shell_start.sh
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -143,7 +143,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+bracketleft move workspace to output left
 bindsym $mod+bracketright move workspace to output right
 
-exec_always --no-startup-id /opt/change_screens.sh
+# exec_always --no-startup-id /opt/change_screens.sh
 
 # ============================================
 
@@ -172,10 +172,10 @@ exec --no-startup-id feh --bg-fill ~/.wallpaper.png
 #        font pango:DejaVu Sans Mono 15
 # }
 
-# PolyBar
+# bar
 
 bar {
-        i3bar_command $HOME/.config/polybar/launch.sh --docky   
+        i3bar_command i3-status
 }
 
 for_window [instance="dropdown"] floating enable
@@ -199,7 +199,21 @@ exec xautolock -time 15 -locker 'maim /tmp/screen_locked.png; mogrify -scale 10%
 
 # Startup apps
 # - hygiene
-# 
+# - gping
+bindsym $mod+s exec alacritty -e zsh -c "$HOME/tools/misc_tools/hygeine.sh; exec zsh"
+bindsym $mod+s exec alacritty -e zsh -c "gping 1.1.1.1; exec zsh"
+
+# if laptop:
 
 
-# if la
+#;$HOME/.config/polybar/launch.sh --docky   
+
+# # PolyBar
+
+# bar {
+#         i3bar_command $HOME/.config/polybar/launch.sh --docky   
+# }
+
+# exec --no-startup-id feh --bg-fill ~/Pictures/back.jpg
+# start a terminal
+# bindsym $mod+Return exec /home/james/.config/i3/custom_shell_start.sh
