@@ -1,12 +1,15 @@
 [user]
 	name = James.Henderson
-	email = james.henderson@withsecure.com
+	email = james.henderson@reversec.com
 
-[includeIf "hasconfig:remote.*.url:git@git.reversec.com/**"]
-  path = .gitconfig-work
-[includeIf "hasconfig:remote.*.url:git@github.com/**"]
-  path = .gitconfig-priv
-[includeIf "hasconfig:remote.*.url:https://github.com/**"]
-  path = .gitconfig-priv
+[includeIf "hasconfig:remote.*.url:git@git.reversec.com:*/**"]
+  path = ~/.gitconfig-work
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+  path = ~/.gitconfig-priv
+[includeIf "hasconfig:remote.*.url:https://github.com/*/**"]
+  path = ~/.gitconfig-priv
 [init]
 	defaultBranch = main
+
+[core]
+    editor = /snap/bin/subl -n -w

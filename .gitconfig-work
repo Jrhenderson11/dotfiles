@@ -1,5 +1,5 @@
 [user]
-	email = james.henderson@withsecure.com
-	name = James Henderson
+	email = james.henderson@reversec.com
+	name = hendo
 [core]
 	editor = /snap/bin/subl -n -w

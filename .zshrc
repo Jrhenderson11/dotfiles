@@ -163,16 +163,12 @@ export PATH="$PATH:$HOME/.rvm/bin:/usr/lib/postgresql/9.5/bin/"
 export PATH="$PATH:/tools/metasploit-framework/"
 
 
-
-
 # add ruby bins dir
 # PATH="$HOME/.rvm/gems/ruby-2.6.2@metasploit-framework/bin:$HOME/.rvm/gems/ruby-2.6.2@global/bin:$HOME/.rvm/rubies/ruby-2.6.2/bin:$PATH"
 # PATH="$HOME/.rvm/gems/ruby-2.7.2@metasploit-framework/bin:$HOME/.rvm/gems/ruby-2.7.2@global/bin:$HOME/.rvm/rubies/ruby-2.7.2/bin:$PATH"
 
 # GEM_HOME=/home/james/.rvm/gems/ruby-2.7.2
 # GEM_PATH=/home/james/.rvm/gems/ruby-2.7.2:/home/james/.rvm/gems/ruby-2.7.2@global
-
-
 
 
 # Add cargo bins for luverly bat
