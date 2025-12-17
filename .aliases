@@ -441,4 +441,4 @@ rsed () {
 }
 
 
-function mkrole() { echo "\n   - role: $1\n     tags: $1\n" >> playbooks/all.yml; mkdir -p roles/$1/tasks;s roles/$1/tasks/main.yml;}
+function mkrole() { echo "\n   - role: $1\n     tags: $1" >> playbooks/all.yml; mkdir -p roles/$1/tasks;s roles/$1/tasks/main.yml;}
