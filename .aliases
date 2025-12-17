@@ -82,6 +82,7 @@ alias git='git '
 alias sta='status -uall'
 alias gdiff='git diff'
 
+alias diff=delta
 
 alias gc='git clone `xclip -selection c -o`'
 
