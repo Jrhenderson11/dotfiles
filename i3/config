@@ -200,8 +200,8 @@ exec xautolock -time 15 -locker 'maim /tmp/screen_locked.png; mogrify -scale 10%
 # Startup apps
 # - hygiene
 # - gping
-bindsym $mod+s exec alacritty -e zsh -c "$HOME/tools/misc_tools/hygeine.sh; exec zsh"
-bindsym $mod+s exec alacritty -e zsh -c "gping 1.1.1.1; exec zsh"
+exec --no-startup-id i3-sensible-terminal -e zsh -c "$HOME/tools/misc_tools/hygeine.sh; exec zsh"
+exec --no-startup-id i3-sensible-terminal -e zsh -c "gping 1.1.1.1; exec zsh"
 
 # if laptop:
 

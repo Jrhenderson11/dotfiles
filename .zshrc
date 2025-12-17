@@ -153,7 +153,7 @@ source $HOME/.aliases
 
 # Go settings
 GOROOT=/usr/local/go
-GOPATH=/home/james/go
+GOPATH=$HOME/go
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change (no screw you)
 export PATH="$PATH:$HOME/.rvm/bin:/usr/lib/postgresql/9.5/bin/"
