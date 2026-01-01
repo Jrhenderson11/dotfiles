@@ -175,7 +175,7 @@ exec --no-startup-id feh --bg-fill ~/.wallpaper.png
 # bar
 
 bar {
-        i3bar_command i3-status
+        status_command i3status
 }
 
 for_window [instance="dropdown"] floating enable
@@ -211,7 +211,7 @@ exec --no-startup-id i3-sensible-terminal -e zsh -c "gping 1.1.1.1; exec zsh"
 # # PolyBar
 
 # bar {
-#         i3bar_command $HOME/.config/polybar/launch.sh --docky   
+#         status_command $HOME/.config/polybar/launch.sh --docky   
 # }
 
 # exec --no-startup-id feh --bg-fill ~/Pictures/back.jpg

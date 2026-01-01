@@ -82,13 +82,12 @@ alias git='git '
 alias sta='status -uall'
 alias gdiff='git diff'
 
-alias diff=delta
-
 alias gc='git clone `xclip -selection c -o`'
 
 # Backup
 backup='sudo /opt/backup.sh'
 
+alias binja="binaryninja"
 
 # pwnie island
 alias pwnie_island="/home/james/Documents/CTF/afnom/pwnie_island/PwnAdventure3/PwnAdventure3/Binaries/Linux/PwnAdventure3-Linux-Shipping"
@@ -112,6 +111,9 @@ alias zotero='nohup /opt/Zotero_linux-x86_64/zotero &'
 
 # Home network
 alias lamassu='ssh pi@lamassu'
+
+# cutter
+alias cutter-re='nohup /tools/reversing/cutter/Cutter-v2.3.4-Linux-x86_64.AppImage >/dev/null 2>&1 &'
 
 alias pyv="python3 -m venv .venv; . .venv/bin/activate"
 
@@ -442,3 +444,4 @@ rsed () {
 
 
 function mkrole() { echo "\n   - role: $1\n     tags: $1" >> playbooks/all.yml; mkdir -p roles/$1/tasks;s roles/$1/tasks/main.yml;}
+
