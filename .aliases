@@ -42,7 +42,7 @@ alias 'pydoc '='python3 -m pydoc '
 
 # Editors
 alias sublime='/usr/bin/subl'
-alias s='/snap/bin/subl'
+alias s='/usr/bin/subl'
 alias pycharm='/home/james/Documents/jetbrains/pycharm-community-2018.3.3/bin/pycharm.sh'
 alias clion='/home/james/Documents/jetbrains/bin/clion.sh'
 alias android_studio="/home/james/android-studio/bin/studio.sh &"
@@ -76,6 +76,8 @@ function highlight_red () {
         GREP_COLORS='mt=1;31' grep -E --color "$1|$"
     done
 }
+
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 # Git
 alias git='git '
@@ -445,3 +447,45 @@ rsed () {
 
 function mkrole() { echo "\n   - role: $1\n     tags: $1" >> playbooks/all.yml; mkdir -p roles/$1/tasks;s roles/$1/tasks/main.yml;}
 
+alias ocr "python3 ~/misc_tools/ocr.py"
+# ocrtext - print only recognized text from image(s) via PaddleOCR CLI + jq
+# function ocr() {
+#   if [[ $# -eq 0 ]]; then
+#     echo "[-] usage: ocr <image> [image ...]" >&2
+#     return 1
+#   fi
+
+#   command -v paddleocr >/dev/null || { echo "[-] paddleocr not found" >&2; return 1; }
+#   command -v jq >/dev/null        || { echo "[-] jq not found" >&2; return 1; }
+
+#   local tmp img stem json rc=0
+#   tmp=$(mktemp -d) || return 1
+
+#   for img in "$@"; do
+#     if [[ ! -f "$img" ]]; then
+#       echo "[-] not a file: $img" >&2
+#       rc=1; continue
+#     fi
+
+#     DISABLE_MODEL_SOURCE_CHECK=True paddleocr ocr -i "$img" \
+#       --lang en \
+#       --use_textline_orientation True \
+#       --use_doc_orientation_classify False \
+#       --use_doc_unwarping False \
+#       --save_path "$tmp" >/dev/null 2>&1
+
+#     stem=$(basename "${img%.*}")
+#     json="$tmp/${stem}_res.json"
+
+#     if [[ -f "$json" ]]; then
+#       (( $# > 1 )) && echo "[+] $img" >&2
+#       jq -r '.rec_texts[]' "$json"
+#     else
+#       echo "[-] OCR failed: $img" >&2
+#       rc=1
+#     fi
+#   done
+
+#   rm -rf "$tmp"
+#   return $rc
+# }
